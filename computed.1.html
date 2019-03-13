@@ -2,18 +2,12 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Vue.js练习-搜索页面的实现</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<!-- 通过CDN引入Vue.js -->
+		<title>Vue.js computed练习-搜索页面的实现</title>
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 		<style type="text/css">
 			.container {
 				width: 90%;
 				margin: 0 auto;
-				background-color: white;
-				border: none;
 			}
 
 			.input-box {
@@ -25,11 +19,9 @@
 			.item {
 				display: flex;
 				height: 100px;
-				border: 1px solid #EEEEEE;
+				border: 1px solid #eee;
 				border-radius: 8px;
 				margin-bottom: 8px;
-				border: none;
-				
 			}
 
 			.item-title {
@@ -37,70 +29,34 @@
 			}
 
 			.item-thumbnail {
-				flex: 1 1 20%;
+				flex: 1 1 20%
 			}
 
 			.item-thumbnail img {
 				width: 100%;
-				height: 100%
+				height: 100%;
 			}
 
-			a:link {
-				text-decoration: none;
-				color: black
-			}
-
-			a:active {
-				text-decoration: underline;
-				color: blue
-			}
-
-			a:hover {
-				text-decoration: underline;
-				color: rgb(59, 133, 160)
-			}
-
-			a:visited {
-				text-decoration: none;
-				color: rgb(127, 0, 153)
-			}
-			
-			.text1{
-				width:85%;
-				
-			}
-			
-			.btn{
-				width:70px;
-				height:31px
-			}
 		</style>
 	</head>
+	<body bgcolor="lightpink">
 	<body>
-		<!-- vue-app的根容器 -->
 		<div id="app">
 			<div class="container">
 				<span>
-					<input type="text" v-model="searchString" placeholder="请输入搜索内容" class="input-box" />
-					<input type="button" class="btn" @click="handleSearch" value="百度一下"/>
+					<input type="text" v-model="searchString" placeholder="请输入搜索内容" class="input-box" /><input type="button" class="btn" value="搜索🔍"/>
 				</span>
-				<br>
-				<br>
-				<div class="item" v-for="article in articles_array">
+				<div class="item" v-for="article in filteredArticles">
 					<a :href="article.url" class="item-title">
 						{{article.title}}
 					</a>
-
 					<div class="item-thumbnail">
-						<a :href="article.url" class="item-title">
 						<img :src="article.image">
-						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
-			// 实例化一个Vue对象
 			var app = new Vue({
 				el: '#app',
 				data: {
@@ -131,50 +87,30 @@
 							"url": "https://www.jianshu.com/p/0a6a61b0933c",
 							"image": "https://upload-images.jianshu.io/upload_images/3525704-c7293758fc59e56b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/960/format/webp"
 						}
-					],
-					articles_array: []  //该变量用来存放搜索结果
+					]
 				},
-				created: function() {
-					this.articles_array = this.articles;  //初始化加载页面的时候,先存放全部数据
-				},
-				methods: {
-					handleSearch: function() {
-						var searchString = this.searchString;
-						var len = this.articles.length;
+				computed: {
+					// 计算函数，匹配搜索
+					filteredArticles: function() {
+						var articles_array = this.articles,
+							searchString = this.searchString;
+						//搜索关键词为空,则返回原始数据集
 						if (!searchString) {
-							this.articles_array = this.articles;//关键词为空,返回全部数据
+							return articles_array;
 						}
+						//搜索关键词去除无用空格,转换为小写
 						searchString = searchString.trim().toLowerCase();
-						this.articles_array = this.articles_array.filter(function(item) {
-							if (item.title.toLowerCase().indexOf(searchString) != -1) {
+						//过滤数组中每个元素,如果
+						articles_array = articles_array.filter(function(item) {
+							if (item.title.toLowerCase().indexOf(searchString) !== -1) {
 								return item;
 							}
 						})
+						// 返回转化后的数组
+						return articles_array;;
 					}
 				}
-// 				computed: {
-// 					// 计算函数，匹配搜索
-// 					filteredArticles: function() {
-// 						var articles_array = this.articles,
-// 							searchString = this.searchString;
-// 						//搜索关键词为空,则返回原始数据集
-// 						if (!searchString) {
-// 							return articles_array;
-// 						}
-// 						//搜索关键词去除无用空格,转换为小写
-// 						searchString = searchString.trim().toLowerCase();
-// 						//过滤数组中每个元素,如果
-// 						articles_array = articles_array.filter(function(item) {
-// 							if (item.title.toLowerCase().indexOf(searchString) !== -1) {
-// 								return item;
-// 							}
-// 						})
-// 						// 返回转化后的数组
-// 						return articles_array;;
-// 					}
-// 				}
 			})
 		</script>
-
 	</body>
 </html>
