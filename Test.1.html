@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue.js表单练习</title>
+		<!-- 通过CDN引入Vue.js -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+		<style type="text/css">
+			.whole {
+				margin-top: auto;
+				background-image: url(img/gc.gif);
+			}
+
+			.content {
+				line-height: 40px;
+				text-align: -webkit-center;
+			}
+
+			.p1 {
+				font-style: oblique;
+				font-size: larger;
+				color: #FFFFFF;
+			}
+			.text{
+				width:200px;
+				height: 100px;
+				border:1px solid yellow;
+			}
+			.btn{
+				width: 100px;
+				height: 40px;
+				color: black;
+				border-radius: 20px;
+				font-size: 14px;
+				background-color: #FFFFFF;
+				border: 1px solid #FFFFFF;
+				outline: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" class="whole">
+			<div class="content">
+
+				<span class="p1"><i class="icon-user">&nbsp;&nbsp;</i>用&nbsp;户&nbsp;名：&nbsp;<input v-model="message1" placeholder="请输入用户名"></span>
+				<br>
+				<span class="p1">您的用户名为：{{message1}}</span>
+				<br>
+				<span class="p1"><i class="icon-lock">&nbsp;&nbsp;</i>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" v-model="password"
+				 placeholder="请设置密码">
+				<br>
+				<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password"
+				 v-model="password2" placeholder="请重复密码">
+				 </span>
+				<br>
+				<br>
+				<span class="p1"><i class="icon-sort">&nbsp;&nbsp;</i>出生日期：</span>
+				<select v-model="birthYear" name="bYear">
+					<option>出生年份</option>
+					<option value="1990">1990年</option>
+					<option value="1991">1991年</option>
+					<option value="1992">1992年</option>
+					<option value="1993">1993年</option>
+					<option value="1994">1994年</option>
+					<option value="1995">1995年</option>
+					<option value="1996">1996年</option>
+					<option value="1997">1997年</option>
+					<option value="1998">1998年</option>
+					<option value="1999">1999年</option>
+					<option value="2000">2000年</option>
+				</select>
+				<br>
+				<br>
+				<span class="p1"><i class="icon-bolt">&nbsp;&nbsp;</i>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 &nbsp;<input type="radio" id="male" value="male"
+					 v-model="picked">
+					<i class="icon-male">&nbsp;&nbsp;</i><label for="male">男</label>
+					<input type="radio" id="fmale" value="fmale" v-model="picked">
+					<i class="icon-female">&nbsp;&nbsp;</i><label for="fmale">女</label>
+				</span>
+				<br>
+				<br>
+
+				<span class="p1"><i class="icon-edit">&nbsp;&nbsp;</i>个人简介：<textarea v-model="message2" class="text" placeholder="个人介绍..."></textarea></span>
+					<br>
+					<br>
+					<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+					 type="button" class="btn" @click="commit"><i class="icon-ok-circle"></i>完成</button>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message1: 'Tomcat',
+					password: 'abc',
+					password2: 'abc',
+					birthYear: '1999',
+					picked: 'male',
+					message2: '',
+				},
+				methods: {
+					commit: function() {
+						alert("Congratulations to you," + this.message1 + "!");
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

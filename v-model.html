@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>v-model数据双向绑定练习</title>
+		<!-- 通过CDN引入Vue.js -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			.container{
+				width:100%;
+				margin:0 auto;
+				border-radius: 30% 30%;
+				
+			}
+			.picture img{
+				width:120px;
+				height: auto;
+				
+				border-radius: 50% 50%;
+			}
+			.picture{
+				float: left;
+				width: 20%;
+				
+			}
+			.word1{
+				float: right;
+				width: 80%;
+				line-height: 7px;
+			}
+			.word2{
+				float: right;
+				width: 75%;
+			}
+			
+			.card{
+				width: 800px;
+				
+				
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<p v-show="follow">推荐作者&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp🔺换一批</p>
+			<div class="container">
+				<div class="card" v-for="author in authors">
+					
+					<div class="picture">
+						<img :src="author.cover" />
+					</div>
+					<div class="word1">
+					<p class="p3">{{author.id}}</p><br><p>{{author.word}}·{{author.like}}</p>
+					
+					<div class="word2">
+					    <p v-if="author.follow" class="p1">×取关</p><p v-else="p2">√关注</p>
+						</div>
+						
+							
+						
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data:{
+					follow:true,
+					authors:[
+						{
+						cover:'img/小猪佩奇.jpg',
+						id:'Perke',
+						word:'已写1234字',
+						like:'15个💗',
+						follow:false,
+						},
+						{
+						cover:'img/头像.jpg',
+						id:'Yboy',
+						word:'已写3052字',
+						like:'20个💗',
+						follow:false,
+						},
+						{
+						cover:'img/Irving.jpg',
+						id:'Irving',
+						word:'已写20.0k字',
+						like:'1.5k个💗',
+						follow:true,
+						},
+						{
+						cover:'img/Eason.jpg',
+						id:'Eason',
+						word:'已写40.0k字',
+						like:'20.0k个💗',
+						follow:true,
+						},
+						{
+						cover:'img/logo.jpg',
+						id:'Pig',
+						word:'已写5000字',
+						like:'0个💗',
+						follow:false,
+						}
+					]
+				}
+			})
+		</script>
+	</body>
+</html>
